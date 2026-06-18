@@ -1,32 +1,31 @@
-import RegisterForm from "@/components/forms/auth/register.form";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "ECOM | Sign Up",
-  description: "E-commerce registration page",
-};
+import RegisterForm from '@/components/forms/auth/register.form'
+import Link from 'next/link'
+import React from 'react'
 
 const RegisterPage = () => {
-  return (
-    <main className="h-full w-full flex items-center justify-center">
-      {/* Page Content */}
-      <div className="min-h-80 min-w-80 rounded-md border border-indigo-500 p-4 py-6 shadow-sm shadow-indigo-300 flex flex-col gap-4">
-        
-        {/* Form Heading */}
-        <div className="flex flex-col">
-          <h1 className="text-[18px] font-semibold tracking-wider leading-6">
-            Create Account
-          </h1>
-          <p className="text-sm font-normal tracking-wider">
-            Register to create your new account.
-          </p>
-        </div>
+    return (
+        <main className='h-full w-full flex justify-center items-center'>
+            {/* page content */}
+            <div className='min-w-100 min-h-90 border border-indigo-500 rounded-md shadow-sm shadow-indigo-200 px-4 py-6 flex flex-col gap-6'>
+                {/* heading */}
+                <div>
+                    <h1 className='text-2xl font-semibold'>Sign up</h1>
+                    <p className='text-lg font-normal'>Get started to order products</p>
+                </div>
 
-        {/* Form */}
-        <RegisterForm />
-      </div>
-    </main>
-  );
-};
+                {/*form */}
+                <RegisterForm />
 
-export default RegisterPage;
+
+                <div className='text-center -mt-4'>
+                    <p>Already have an account? <Link href={'/auth/login'} className='italic font-semibold text-indigo-500'>Sign In</Link></p>
+                </div>
+            </div>
+
+
+
+        </main>
+    )
+}
+
+export default RegisterPage

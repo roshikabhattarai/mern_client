@@ -1,83 +1,112 @@
-import React from "react";
+'use client'
+
+import Button from '@/components/common/ui/button'
+import Input from '@/components/common/ui/input'
+import React, { useState } from 'react'
 
 const RegisterForm = () => {
+
+    const [full_name, setFull_Name]= useState('')
+    const [email, setEmail]= useState('')
+    const [password, setPassword]= useState('')
+    const [RetypePassword, setRetypePassword]= useState('')
+    const [phone, setPhone]= useState('')
+
+    const onFull_NameChange= (e: React.ChangeEvent<HTMLInputElement, HTMLElement>)=>{
+        console.log('Full_Name', e.target.value)
+        setEmail(e.target.value)
+    }
+
+    const onEmailChange= (e: React.ChangeEvent<HTMLInputElement, HTMLElement>)=>{
+        console.log('email', e.target.value)
+        setEmail(e.target.value)
+    }
+
+    const onPasswordChange= (e: React.ChangeEvent<HTMLInputElement, HTMLElement>)=>{
+        console.log('Password', e.target.value)
+        setEmail(e.target.value)
+    }
+
+    const onRetypePasswordChange= (e: React.ChangeEvent<HTMLInputElement, HTMLElement>)=>{
+        console.log('RetypePassword', e.target.value)
+        setEmail(e.target.value)
+    }
+
+    const onPhoneChange= (e: React.ChangeEvent<HTMLInputElement, HTMLElement>)=>{
+        console.log('Phone', e.target.value)
+        setEmail(e.target.value)
+    }
+
+    const onSubmit =(e: React.SubmitEvent<HTMLFormElement>)=>{
+            e.preventDefault()
+    
+            console.log('form data', {
+                full_name,
+                email,
+                password,
+                RetypePassword,
+                phone
+            })
+        }
+
     return (
-        <div className="w-full">
-            <form className="w-full flex flex-col gap-4">
-                Full Name
-                <div className="w-full flex flex-col gap-1">
-                    <label
-                        htmlFor="fullName"
-                        className="text-[14px] font-medium"
-                    >
-                        Full Name
-                    </label>
-                    <input
-                        id="fullName"
-                        className="w-full border-[1.5px] border-indigo-700 px-2 py-2 rounded-sm"
-                        type="text"
-                        placeholder="Enter your full name"
-                    />
-                </div>
+        <div className="w-full ">
+            <form className="flex flex-col gap-4 w-full">
+                <Input
+                    name='full_name'
+                    onChange={onFull_NameChange}
+                    id='full_name'
+                    type='text'
+                    placeholder='John Doe'
+                    label='Full Name'
+                />
 
-                {/* Email */}
-                <div className="w-full flex flex-col gap-1">
-                    <label
-                        htmlFor="email"
-                        className="text-[14px] font-medium"
-                    >
-                        Email
-                    </label>
-                    <input
-                        id="email"
-                        className="w-full border-[1.5px] border-indigo-600 px-2 py-2 rounded-sm"
-                        type="email"
-                        placeholder="Enter your email"
-                    />
-                </div>
+                <Input
+                    name="email"
+                    onChange={onEmailChange}
+                    label={'Email'}
+                    id="email"
+                    placeholder="johndoe@gmail.com"
+                    type="text"
+                />
 
-                {/* Password */}
-                <div className="w-full flex flex-col gap-1">
-                    <label
-                        htmlFor="password"
-                        className="text-[14px] font-medium"
-                    >
-                        Password
-                    </label>
-                    <input
-                        id="password"
-                        className="w-full border-[1.5px] border-indigo-600 px-2 py-2 rounded-sm"
-                        type="password"
-                        placeholder="Enter password"
-                    />
-                </div>
+                <Input
+                onChange={onPasswordChange}
+                    name="password"
+                    label="Password"
+                    placeholder="********"
+                    id="password"
+                    type="password"
+                />
 
-                {/* Confirm Password */}
-                <div className="w-full flex flex-col gap-1">
-                    <label
-                        htmlFor="confirmPassword"
-                        className="text-[14px] font-medium"
-                    >
-                        Confirm Password
-                    </label>
-                    <input
-                        id="confirmPassword"
-                        className="w-full border-[1.5px] border-indigo-600 px-2 py-2 rounded-sm"
-                        type="password"
-                        placeholder="Confirm password"
-                    />
-                </div>
+                <Input
+                onChange={onRetypePasswordChange}
+                    name="c_password"
+                    label="Retype Password"
+                    placeholder="********"
+                    id="c_password"
+                    type="password"
+                />
 
-                {/* Button */}
-                <button
-                    type="submit"
-                    className="w-full bg-linear-to-r from-indigo-400 to-indigo-600 py-2.5 rounded-sm cursor-pointer text-white font-bold mt-3"
-                >
-                    Sign Up
-                </button>
+                <Input
+                onChange={onPhoneChange}
+                    label='Phone Number'
+                    id='phone'
+                    name='phone'
+                    type='text'
+                    placeholder='98653****0'
+                />
+
+
+                {/*button */}
+               <Button
+               type='submit'
+               label='Sign Up'
+               />
             </form>
         </div>
-    );
-};
+    )
+}
 
-export default RegisterForm;
+
+export default RegisterForm
