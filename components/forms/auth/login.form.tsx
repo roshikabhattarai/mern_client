@@ -1,62 +1,65 @@
-'use client'
-
+"use client";
 import Button from "@/components/common/ui/button";
 import Input from "@/components/common/ui/input";
-import React, { useState } from "react";
+import { loginSchema } from "@/schema/auth.schema";
+import { TLoginInput, TRegisterInput } from "@/types/auth.types";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+
+
+
 
 const LoginFrom = () => {
 
-    const [email, setEmail]= useState('')
-    const [Password, setPassword]= useState('')
+    const { register, handleSubmit, formState: { errors, } } = useForm({
+        defaultValues: {
+            email: "",
+            password: "",
+        },
+        resolver: yupResolver(loginSchema)
+    });
 
 
-    const onEmailChange =(e: React.ChangeEvent<HTMLInputElement, HTMLInputElement>)=>{
-        console.log('email', e.target.value)
-        setEmail(e.target.value)
-    }
+    console.log(errors)
 
-     const onPasswordChange =(e: React.ChangeEvent<HTMLInputElement, HTMLInputElement>)=>{
-        console.log('password', e.target.value)
-        setPassword(e.target.value)
-    }
-
-     const onSubmit =(e: React.SubmitEvent<HTMLFormElement>)=>{
-        e.preventDefault()
-
-        console.log('form data', {
-            email,
-            Password
-        })
-    }
-
-
+    const onSubmit = (data: TLoginInput) => {
+        console.log("form data", data);
+        // http post /auth/login
+    };
 
     return (
         <div className="w-full ">
-            <form  onSubmit={onSubmit} className="flex flex-col gap-4 w-full">
+            <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="flex flex-col gap-4 w-full"
+            >
+                {/* email input */}
+                <Input
+                    name="email"
+                    register={register}
+                    label={"Email"}
+                    id="email"
+                    required={true}
+                    placeholder="johndoe@gmail.com"
+                    type="text"
+                    error={errors?.email?.message}
+                />
 
-                <Input 
-                name="email" 
-                onChange={onEmailChange}
-                label={'Email'} 
-                id="email" 
-                placeholder="johndoe@gmail.com" 
-                type="text" />
+                {/* password input */}
+                <Input
+                    register={register}
+                    name="password"
+                    label="Password"
+                    placeholder="********"
+                    id="password"
+                    type="password"
+                    required
+                    error={errors?.password?.message}
 
-
-                <Input 
-                onChange={onPasswordChange}
-                name="password" 
-                label="Password" 
-                placeholder="********" 
-                id="password" 
-                type="password" />
+                />
 
                 {/*button */}
-                <Button
-                label='Sign In'
-                type='submit'
-                />
+                <Button label="Sign In" type="submit" />
             </form>
         </div>
     );

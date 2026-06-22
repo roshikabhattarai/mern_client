@@ -2,111 +2,111 @@
 
 import Button from '@/components/common/ui/button'
 import Input from '@/components/common/ui/input'
+import { registerSchema } from '@/schema/auth.schema'
+import { TRegisterInput } from '@/types/auth.types'
+import { yupResolver } from '@hookform/resolvers/yup'
 import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
+
+
+// interface IRegisterInput {
+//     full_name: string;
+//     email: string,
+//     password: string;
+//     c_password: string,
+//     phone?: string
+// }
 
 const RegisterForm = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+            full_name: '',
+            email: '',
+            password: '',
+            phone: '',
+            c_password: ''
+        },
+        resolver: yupResolver(registerSchema)
 
-    const [full_name, setFull_Name]= useState('')
-    const [email, setEmail]= useState('')
-    const [password, setPassword]= useState('')
-    const [RetypePassword, setRetypePassword]= useState('')
-    const [phone, setPhone]= useState('')
+    })
 
-    const onFull_NameChange= (e: React.ChangeEvent<HTMLInputElement, HTMLElement>)=>{
-        console.log('Full_Name', e.target.value)
-        setEmail(e.target.value)
+
+
+    const onSubmit = (data: TRegisterInput) => {
+        console.log('form data', data)
     }
 
-    const onEmailChange= (e: React.ChangeEvent<HTMLInputElement, HTMLElement>)=>{
-        console.log('email', e.target.value)
-        setEmail(e.target.value)
-    }
-
-    const onPasswordChange= (e: React.ChangeEvent<HTMLInputElement, HTMLElement>)=>{
-        console.log('Password', e.target.value)
-        setEmail(e.target.value)
-    }
-
-    const onRetypePasswordChange= (e: React.ChangeEvent<HTMLInputElement, HTMLElement>)=>{
-        console.log('RetypePassword', e.target.value)
-        setEmail(e.target.value)
-    }
-
-    const onPhoneChange= (e: React.ChangeEvent<HTMLInputElement, HTMLElement>)=>{
-        console.log('Phone', e.target.value)
-        setEmail(e.target.value)
-    }
-
-    const onSubmit =(e: React.SubmitEvent<HTMLFormElement>)=>{
-            e.preventDefault()
-    
-            console.log('form data', {
-                full_name,
-                email,
-                password,
-                RetypePassword,
-                phone
-            })
-        }
-
+    console.log(errors)
     return (
         <div className="w-full ">
-            <form className="flex flex-col gap-4 w-full">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 w-full">
                 <Input
+                    register={register}
                     name='full_name'
-                    onChange={onFull_NameChange}
                     id='full_name'
                     type='text'
                     placeholder='John Doe'
+                    required
                     label='Full Name'
+                    error={errors?.full_name?.message}
                 />
 
                 <Input
+                    register={register}
                     name="email"
-                    onChange={onEmailChange}
                     label={'Email'}
                     id="email"
                     placeholder="johndoe@gmail.com"
+                    required
                     type="text"
+                    error={errors?.email?.message}
+
                 />
 
                 <Input
-                onChange={onPasswordChange}
+                    register={register}
                     name="password"
                     label="Password"
                     placeholder="********"
                     id="password"
+                    required
                     type="password"
+                    error={errors?.password?.message}
+
                 />
 
                 <Input
-                onChange={onRetypePasswordChange}
+                    register={register}
                     name="c_password"
                     label="Retype Password"
                     placeholder="********"
                     id="c_password"
+                    required
                     type="password"
+                    error={errors?.c_password?.message}
+
                 />
 
                 <Input
-                onChange={onPhoneChange}
+                    register={register}
                     label='Phone Number'
                     id='phone'
                     name='phone'
                     type='text'
                     placeholder='98653****0'
+                        error={errors?.phone?.message}
+
                 />
 
 
                 {/*button */}
-               <Button
-               type='submit'
-               label='Sign Up'
-               />
+                <Button
+                    label='Sign Up'
+                    type='submit'
+                />
             </form>
         </div>
     )
 }
-
 
 export default RegisterForm

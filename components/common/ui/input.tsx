@@ -1,4 +1,5 @@
 import React from 'react'
+import { UseFormRegister } from 'react-hook-form';
 import { LuAsterisk } from "react-icons/lu";
 
 
@@ -8,28 +9,34 @@ interface IProps {
     type: 'text' | 'email' | 'password' | 'number';
     placeholder: string,
     name: string,
-    onChange:(e:React.ChangeEvent<HTMLInputElement,HTMLInputElement>) => void
+    onChange?:(e:React.ChangeEvent<HTMLInputElement,HTMLInputElement>) => void
+    register:UseFormRegister<any>
+    required?:boolean
+    error?:string
 }
 
 
-const Input = ({ id, label, placeholder, type, name, onChange }: IProps) => {
+const Input = ({ id, label, placeholder, type, name, register, required=false, error}: IProps) => {
     return (
         <div className="w-full flex flex-col gap-1">
             <div className={'flex'}>
                 <label htmlFor={id} className="text-[14px] font-semibold ">
                     {label}
                 </label>
-                <LuAsterisk className='text-indigo-700' />
+                {required && <LuAsterisk className='text-indigo-700' />}
             </div>
             <input
-            onChange={onChange}
+            {...register(name)}
+            // onChange={onChange}
                 id={id}
-                className="w-full border-[1.5px] border-indigo-300 px-2 py-2.5 rounded-sm focus:outline-indigo-700"
+                className={`w-full border-[1.5px] border-indigo-300 px-2 py-2.5 rounded-sm ${error ? 'border-red-500 focus:outline-red-500': 'border-indigo-300 focus:outline-indigo-700'}`}
                 type={type}
                 placeholder={placeholder}
                 name={name}
             />
+           <p className='h-1 text-blue-500 text-xs -mt-0.5 '>(errors)</p>
         </div>
+        
     )
 }
 
