@@ -1,11 +1,9 @@
 import React from 'react'
 
-const page = () => {
-  return (
-    <div>
-      About Page
-    </div>
-  )
+const AboutUsPage = () => {
+    return (
+        <main className='h-full'>AboutUs Page</main>
+    )
 }
 
-export default page
+export default AboutUsPage

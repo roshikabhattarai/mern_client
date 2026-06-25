@@ -1,11 +1,9 @@
 import React from 'react'
 
-const page = () => {
-  return (
-    <div>
-      Wishlist Page
-    </div>
-  )
+const WishlistPage = () => {
+    return (
+        <main className='h-full'>Wishlist Page</main>
+    )
 }
 
-export default page
+export default WishlistPage

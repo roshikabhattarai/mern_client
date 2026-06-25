@@ -1,11 +1,9 @@
 import React from 'react'
 
-const page = () => {
-  return (
-    <div>
-      Product Page
-    </div>
-  )
+const ProductsPage = () => {
+    return (
+        <main className='h-full'>ProductsPage</main>
+    )
 }
 
-export default page
+export default ProductsPage
