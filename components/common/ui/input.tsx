@@ -13,10 +13,11 @@ interface IProps {
     register:UseFormRegister<any>
     required?:boolean
     error?:string
+    multiline?: boolean
 }
 
 
-const Input = ({ id, label, placeholder, type, name, register, required=false, error}: IProps) => {
+const Input = ({ id, multiline= false,  label, placeholder, type, name, register, required=false, error}: IProps) => {
     return (
         <div className="w-full flex flex-col gap-1">
             <div className={'flex'}>
@@ -25,19 +26,28 @@ const Input = ({ id, label, placeholder, type, name, register, required=false, e
                 </label>
                 {required && <LuAsterisk className='text-indigo-700' />}
             </div>
-            <input
+            {multiline?
+            <textarea 
             {...register(name)}
-            // onChange={onChange}
+            
+                id={id}
+                placeholder={placeholder}
+                className={`w-full border-[1.5px] min-h-60 border-indigo-300 px-2 py-2.5 rounded-sm ${error ? 'border-red-500 focus:outline-red-500': 'border-indigo-300 focus:outline-indigo-700'}`}
+         
+         />   
+           : <input
+            {...register(name)}
+           
                 id={id}
                 className={`w-full border-[1.5px] border-indigo-300 px-2 py-2.5 rounded-sm ${error ? 'border-red-500 focus:outline-red-500': 'border-indigo-300 focus:outline-indigo-700'}`}
                 type={type}
                 placeholder={placeholder}
-                name={name}
-            />
+                // name={name}
+            />}
            <p className='h-1 text-blue-500 text-xs -mt-0.5 '>(errors)</p>
         </div>
         
-    )
-}
-
+            )
+            
+        }
 export default Input
