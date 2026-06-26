@@ -1,5 +1,5 @@
 import PageTitle from '@/components/admin/page-title'
-import  BrandForm from '@/components/forms/admin/brand.form'
+import  BrandForm from '@/components/forms/admin/categories.form'
 import React from 'react'
 
 const CreateBrandPage = () => {
@@ -9,7 +9,7 @@ const CreateBrandPage = () => {
 
                 title='Add new brand'
                 linkText='Go Back'
-                link='/admin/brands'
+                link='/admin/category'
 
             
             />
