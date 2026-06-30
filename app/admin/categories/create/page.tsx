@@ -1,21 +1,18 @@
-import PageTitle from '@/components/admin/page-title'
-import  BrandForm from '@/components/forms/admin/categories.form'
 import React from 'react'
+import PageTitle from '@/components/admin/page-title'
+import CategoryForm from '@/components/forms/admin/categories.form'
 
-const CreateBrandPage = () => {
+const CreateCategoryPage = () => {
     return (
-        <main className='h-full'>
+        <main>
             <PageTitle
-
-                title='Add new brand'
-                linkText='Go Back'
-                link='/admin/category'
-
-            
+                title="Add New Category"
+                linkText="Go Back"
+                link="/admin/category"
             />
-            <BrandForm/>
+
+            <CategoryForm />
         </main>
     )
 }
-
-export default CreateBrandPage
+export default CreateCategoryPage

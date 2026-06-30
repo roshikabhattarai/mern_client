@@ -1,10 +1,10 @@
 import * as yup from "yup";
 
-export const brandSchema = yup.object({
+export const categorySchema = yup.object({
   name: yup
     .string()
-    .required("Brand name is required")
-    .min(3, "Brand name must be at least 3 characters"),
+    .required("Category name is required")
+    .min(3, "Category name must be at least 3 characters"),
 
   description: yup
     .string()
@@ -16,9 +16,9 @@ export const brandSchema = yup.object({
       (value) => !value || value.length >= 25
     ),
 
-  logo: yup
+  image: yup
     .mixed<File | File[]>()
-    .required("Logo is required"),
+    .required("Category image is required"),
 });
 
-export type TBrandInput = yup.InferType<typeof brandSchema>;
+export type TCategoryInput = yup.InferType<typeof categorySchema>;

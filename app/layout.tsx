@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/layout/header";
+import ReactQueryProvider from "@/providers/react-query-provider";
+import { Toaster } from "react-hot-toast";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,8 +33,11 @@ export default function RootLayout({
     >
       <body className="h-screen flex flex-col tracking-wider">
         {/* <div>Nav bar</div> */}
-        {children}
-        {/* <Footer /> */}
+        <ReactQueryProvider>
+           {children}
+        </ReactQueryProvider>
+       
+        <Toaster/>
       </body>
     </html>
   );
